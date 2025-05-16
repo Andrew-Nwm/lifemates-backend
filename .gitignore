@@ -31,3 +31,36 @@ build/
 
 ### VS Code ###
 .vscode/
+
+# IntelliJ IDEA specific files
+.idea/
+*.iml
+*.iws
+out/
+
+# Maven build files
+/target/
+/.mvn/wrapper/maven-wrapper.jar
+
+# Logs and temporary files
+*.log
+logs/
+hs_err_pid*
+*.pid
+
+# Local environment variables
+.env
+*.env
+
+# Docker
+Dockerfile
+docker-compose.yml
+docker-compose.override.yml
+
+# OS generated files
+.DS_Store
+Thumbs.db
+
+# Ignore Node modules (if you have frontend in the same repo)
+node_modules/
+dist/
