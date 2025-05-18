@@ -1,6 +1,7 @@
 package com.lifemates.service;
 
 import com.lifemates.model.LoginAttempt;
+import com.lifemates.util.SnortLogWriter;
 import com.lifemates.repository.LoginAttemptRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -17,6 +18,7 @@ public class LoginAttemptService {
     private LoginAttemptRepository loginAttemptRepository;
 
     // Registrar un nuevo intento de inicio de sesión
+
     public void registerLoginAttempt(String username, boolean success, String ipAddress, String userAgent) {
         LoginAttempt attempt = new LoginAttempt();
         attempt.setUsername(username);
@@ -26,7 +28,11 @@ public class LoginAttemptService {
         attempt.setTimestamp(LocalDateTime.now());
 
         loginAttemptRepository.save(attempt);
+
+        // Registrar también en el archivo .log monitoreado por Snort
+        SnortLogWriter.logAttempt(username, success, ipAddress, userAgent);
     }
+
 
     // Obtener todos los intentos de inicio de sesión
     public List<LoginAttempt> getAllLoginAttempts() {
